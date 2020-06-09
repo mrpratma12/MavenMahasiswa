@@ -1,0 +1,85 @@
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
+    <title>Daftar Mahasiswa</title>
+
+    <style type="text/css">
+        h1 {
+            font-family: sans-serif;
+            border-bottom: 3px solid #abcae8;
+            color: #4d7ba7;
+        }
+
+        #table {
+            border-collapse: collapse;
+            color: #4d7ba7;
+            font-family: arial;
+        }
+
+        #table th {
+            padding: 10px;
+            border-bottom: 2px solid #4d7ba7;
+            text-transform: uppercase;
+            font-weight: bold;
+        }
+
+        #table td {
+            padding: 10px;
+            border-bottom: 1px solid #4d7ba7;
+            padding-right: 25px;
+        }
+
+        #table a {
+            text-decoration: none;
+            color: #4d7ba7;
+        }
+
+        #buttonTambah {
+            margin-bottom: 10px;
+        }
+
+        #buttonTambah a {
+            text-decoration: none;
+            color: #ffffff;
+            font-family: arial;
+            background: #abcae8;
+            border: 1px solid antiquewhite;
+            padding: 5px;
+            border-radius: 8px;
+        }
+    </style>
+</head>
+<body>
+<h1>Daftar Data Mahasiswa</h1>
+<div id="buttonTambah">
+    <a href="/tambah">Tambah</a>
+    <a href="/xls">Export Excel</a>
+    <a href="/pdf">Export PDF</a>
+</div>
+
+<table id="table">
+    <thead>
+    <tr>
+        <th>id</th>
+        <th>NIM</th>
+        <th>Nama</th>
+        <th>Alamat</th>
+        <th>Opsi</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="mahasiswa : ${mahasiswas}">
+        <td th:text="${mahasiswa.id}"> NIM ID</td>
+        <td th:text="${mahasiswa.nim}"> NIM</td>
+        <td th:text="${mahasiswa.nama}"> Nama</td>
+        <td th:text="${mahasiswa.alamat}"> Alamat</td>
+        <td><a th:href="@{/edit/{mahasiswaId}(mahasiswaId=${mahasiswa.id})}">Edit</a> |
+            <a onclick="return confirm('Are you sure you want to delete this item?');"
+               th:href="@{/delete/{mahasiswaId}(mahasiswaId=${mahasiswa.id})}">Delete</a>
+        </td>
+    </tr>
+    </tbody>
+</table>
+
+</body>
+</html>
